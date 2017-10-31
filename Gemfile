@@ -1,6 +1,12 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
+git_source(:github) do |repo_name|
+  "https://github.com/#{repo_name}"
+end
 
-# Specify your gem's dependencies in aws_cloudwatch_logs.gemspec
 gemspec
+
+group :development do
+  gem 'pry-byebug'
+  gem 'deka_eiwakun'
+end
