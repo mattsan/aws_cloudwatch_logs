@@ -22,7 +22,30 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+require 'aws_cloudwatch_logs'
+
+end_time = Time.now
+start_time = end_time - 60 * 60 # 1 hour ago
+filter_pattern = '"timed out"' # if nil get all log events
+AwsCloudwatchLogs.extract(LOG_GROUP_NAME, start_time, end_time, filter_pattern) do |event|
+  puts <<~EOS
+           event_id: #{event.event_id}
+          timestamp: #{event.timestamp.strftime('%Y-%m-%dT%H:%M:%S%Z'}
+     ingestion_time: #{event.ingestion_time.strftime('%Y-%m-%dT%H:%M:%S%Z'}
+    log_stream_name: #{event.log_stream_name}
+            message: #{event.message}
+  EOS
+end
+```
+
+cf.
+
+| contents | URL |
+|---|---|
+| aws-sdk | http://docs.aws.amazon.com/sdkforruby/api/Aws/CloudWatchLogs/Client.html |
+| event entity | http://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html |
+| filter pattern |http://docs.aws.amazon.com/sdkforruby/api/Aws/CloudWatchLogs/Types/FilteredLogEvent.html |
 
 ## Development
 
